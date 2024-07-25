@@ -1,0 +1,21 @@
+
+
+#!/bin/bash
+
+mkdir -p organized
+
+cd .
+
+for file in *; do
+  extension=$(file --mime-type -b "$file" | cut -d'/' -f2)
+
+  mkdir -p "organized/$extension"
+
+  mv "$file" "organized/$extension"/
+done
+
+rm -r .
+
+find organized -type d
+
+du -sh organized/*
