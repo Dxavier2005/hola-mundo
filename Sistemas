@@ -1,0 +1,17 @@
+#!/bin/bash
+
+mkdir mi_carpeta
+cd mi_carpeta
+for archivo in $(ls ..); do
+  extension=${archivo##*.}
+  mkdir -p $extension
+  mv ../$archivo $extension
+done
+find . -type f -mtime +30 -exec rm {} \;
+find . -type d -exec ls -d {} \; > estructura_directorios.txt
+find . -type f -exec cat {} \; > contenido_archivos.txt
+find . -type f -exec file {} \; > informacion_archivos.txt
+du -h . > tamaño_archivos_directorios.txt
+rm -r mi_carpeta
+
+
